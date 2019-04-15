@@ -23,6 +23,20 @@
   revision = "443386855ca1f4d28d990ae9e46e9bc1533de994"
 
 [[projects]]
+  digest = "1:d5090c0553a95065df5bb9731b29e211701b7e069665e0f17e9aa08af0fdbda2"
+  name = "github.com/aelsabbahy/goss"
+  packages = [
+    ".",
+    "outputs",
+    "resource",
+    "system",
+    "util",
+  ]
+  pruneopts = "UT"
+  revision = "6f0b489a43f445ee8c1c7ac969de5aa1fdbce04e"
+  version = "v0.3.6"
+
+[[projects]]
   digest = "1:f438d91be142877c3ad83157992c91de787ddfbddcc2a7da1ef6ef61606cadc4"
   name = "github.com/cheekybits/genny"
   packages = ["generic"]
@@ -136,6 +150,11 @@
     "github.com/achanda/go-sysctl",
     "github.com/aelsabbahy/GOnetstat",
     "github.com/aelsabbahy/go-ps",
+    "github.com/aelsabbahy/goss",
+    "github.com/aelsabbahy/goss/outputs",
+    "github.com/aelsabbahy/goss/resource",
+    "github.com/aelsabbahy/goss/system",
+    "github.com/aelsabbahy/goss/util",
     "github.com/cheekybits/genny/generic",
     "github.com/docker/docker/pkg/mount",
     "github.com/fatih/color",

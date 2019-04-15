@@ -3,6 +3,7 @@ package goss
 import (
 	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
 	"path/filepath"
 	"runtime"
@@ -29,8 +30,9 @@ func getGossConfig(c *cli.Context) GossConfig {
 		fh = os.Stdin
 		data, err := ioutil.ReadAll(fh)
 		if err != nil {
-			fmt.Printf("Error: %v\n", err)
-			os.Exit(1)
+			//fmt.Printf("Error: %v\n", err)
+			log.Printf("Error: %v\n", err)
+			//os.Exit(1)
 		}
 		OutStoreFormat = getStoreFormatFromData(data)
 		gossConfig = ReadJSONData(data, true)
@@ -44,8 +46,9 @@ func getGossConfig(c *cli.Context) GossConfig {
 	gossConfig = mergeJSONData(gossConfig, 0, path)
 
 	if len(gossConfig.Resources()) == 0 {
-		fmt.Printf("Error: found 0 tests, source: %v\n", source)
-		os.Exit(1)
+		//fmt.Printf("Error: found 0 tests, source: %v\n", source)
+		log.Printf("Error: found 0 tests, source: %v\n", source)
+		//os.Exit(1)
 	}
 	return gossConfig
 }
@@ -60,7 +63,7 @@ func getOutputer(c *cli.Context) outputs.Outputer {
 	return outputs.GetOutputer(c.String("format"))
 }
 
-func Validate(c *cli.Context, startTime time.Time) {
+func Validate(c *cli.Context, startTime time.Time) int32 {
 
 	outputConfig := util.OutputConfig{
 		FormatOptions: c.StringSlice("format-options"),
@@ -78,12 +81,16 @@ func Validate(c *cli.Context, startTime time.Time) {
 		out := validate(sys, gossConfig, c.Int("max-concurrent"))
 		exitCode := outputer.Output(os.Stdout, out, iStartTime, outputConfig)
 		if retryTimeout == 0 || exitCode == 0 {
-			os.Exit(exitCode)
+			log.Printf("exitCode = %+v\n", exitCode)
+			return int32(exitCode)
+			//os.Exit(exitCode)
 		}
 		elapsed := time.Since(startTime)
 		if elapsed+sleep > retryTimeout {
 			color.Red("\nERROR: Timeout of %s reached before tests entered a passing state", retryTimeout)
-			os.Exit(3)
+			log.Printf("\nERROR: Timeout of %s reached before tests entered a passing state", retryTimeout)
+			return int32(1)
+			//os.Exit(3)
 		}
 		color.Red("Retrying in %s (elapsed/timeout time: %.3fs/%s)\n\n\n", sleep, elapsed.Seconds(), retryTimeout)
 		// Reset cache
