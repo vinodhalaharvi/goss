@@ -49,6 +49,7 @@ func main() {
 					Usage:  fmt.Sprintf("Format to output in, valid options: %s", outputs.Outputers()),
 					EnvVar: "GOSS_FMT",
 				},
+
 				cli.StringSliceFlag{
 					Name:   "format-options, o",
 					Usage:  fmt.Sprintf("Extra options passed to the formatter, valid options: %s", outputs.FormatOptions()),
@@ -286,11 +287,11 @@ func main() {
 							Value: 5 * time.Second,
 						},
 						cli.StringFlag{
-							Name: "username, u",
+							Name:  "username, u",
 							Usage: "Username for basic auth",
 						},
 						cli.StringFlag{
-							Name: "password, p",
+							Name:  "password, p",
 							Usage: "Password for basic auth",
 						},
 					},
