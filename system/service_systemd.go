@@ -30,11 +30,6 @@ func (s *ServiceSystemd) Exists() (bool, error) {
 	if strings.Contains(cmd.Stdout.String(), fmt.Sprintf("%s.service", s.service)) {
 		return true, cmd.Err
 	}
-	// Fallback on sysv
-	sysv := &ServiceInit{service: s.service}
-	if e, err := sysv.Exists(); e && err == nil {
-		return true, nil
-	}
 	return false, nil
 }
 
@@ -46,11 +41,6 @@ func (s *ServiceSystemd) Enabled() (bool, error) {
 	cmd.Run()
 	if cmd.Status == 0 {
 		return true, cmd.Err
-	}
-	// Fallback on sysv
-	sysv := &ServiceInit{service: s.service}
-	if en, err := sysv.Enabled(); en && err == nil {
-		return true, nil
 	}
 	return false, nil
 }
@@ -65,9 +55,5 @@ func (s *ServiceSystemd) Running() (bool, error) {
 		return true, cmd.Err
 	}
 	// Fallback on sysv
-	sysv := &ServiceInit{service: s.service}
-	if r, err := sysv.Running(); r && err == nil {
-		return true, nil
-	}
 	return false, nil
 }

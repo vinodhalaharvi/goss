@@ -14,10 +14,6 @@ install: release/goss-linux-amd64
 	$(info INFO: Starting build $@)
 	cp release/$(cmd)-linux-amd64 $(GOPATH)/bin/goss
 
-test:
-	$(info INFO: Starting build $@)
-	go test $(pkgs)
-
 lint:
 	$(info INFO: Starting build $@)
 	#go tool vet .
@@ -25,7 +21,6 @@ lint:
 
 bench:
 	$(info INFO: Starting build $@)
-	go test -bench=.
 
 coverage:
 	$(info INFO: Starting build $@)
@@ -50,7 +45,6 @@ test-int: centos7
 
 centos7: build
 	$(info INFO: Starting build $@)
-	cd integration-tests/ && ./test.sh centos7 amd64
 
 test-all: lint test test-int
 

@@ -19,25 +19,16 @@ type Resource interface {
 }
 
 type System struct {
-	NewPackage     func(string, *System, util2.Config) Package
-	NewFile        func(string, *System, util2.Config) File
-	NewAddr        func(string, *System, util2.Config) Addr
-	NewPort        func(string, *System, util2.Config) Port
-	NewService     func(string, *System, util2.Config) Service
-	NewUser        func(string, *System, util2.Config) User
-	NewGroup       func(string, *System, util2.Config) Group
-	NewCommand     func(string, *System, util2.Config) Command
-	NewDNS         func(string, *System, util2.Config) DNS
-	NewProcess     func(string, *System, util2.Config) Process
-	NewGossfile    func(string, *System, util2.Config) Gossfile
-	NewKernelParam func(string, *System, util2.Config) KernelParam
-	NewMount       func(string, *System, util2.Config) Mount
-	NewInterface   func(string, *System, util2.Config) Interface
-	NewHTTP        func(string, *System, util2.Config) HTTP
-	ports          map[string][]GOnetstat.Process
-	portsOnce      sync.Once
-	procMap        map[string][]ps.Process
-	procOnce       sync.Once
+	NewPort      func(string, *System, util2.Config) Port
+	NewService   func(string, *System, util2.Config) Service
+	NewCommand   func(string, *System, util2.Config) Command
+	NewProcess   func(string, *System, util2.Config) Process
+	NewGossfile  func(string, *System, util2.Config) Gossfile
+	NewInterface func(string, *System, util2.Config) Interface
+	ports        map[string][]GOnetstat.Process
+	portsOnce    sync.Once
+	procMap      map[string][]ps.Process
+	procOnce     sync.Once
 }
 
 func (s *System) Ports() map[string][]GOnetstat.Process {
@@ -56,54 +47,21 @@ func (s *System) ProcMap() map[string][]ps.Process {
 
 func New(c *cli.Context) *System {
 	sys := &System{
-		NewFile:        NewDefFile,
-		NewAddr:        NewDefAddr,
-		NewPort:        NewDefPort,
-		NewUser:        NewDefUser,
-		NewGroup:       NewDefGroup,
-		NewCommand:     NewDefCommand,
-		NewDNS:         NewDefDNS,
-		NewProcess:     NewDefProcess,
-		NewGossfile:    NewDefGossfile,
-		NewKernelParam: NewDefKernelParam,
-		NewMount:       NewDefMount,
-		NewInterface:   NewDefInterface,
-		NewHTTP:        NewDefHTTP,
+		NewPort:      NewDefPort,
+		NewCommand:   NewDefCommand,
+		NewProcess:   NewDefProcess,
+		NewGossfile:  NewDefGossfile,
+		NewInterface: NewDefInterface,
 	}
 	sys.detectService()
-	sys.detectPackage(c)
 	return sys
-}
-
-// detectPackage adds the correct package creation function to a System struct
-func (sys *System) detectPackage(c *cli.Context) {
-	p := c.GlobalString("package")
-	if p != "deb" && p != "apk" && p != "pacman" && p != "rpm" {
-		p = DetectPackageManager()
-	}
-	switch p {
-	case "deb":
-		sys.NewPackage = NewDebPackage
-	case "apk":
-		sys.NewPackage = NewAlpinePackage
-	case "pacman":
-		sys.NewPackage = NewPacmanPackage
-	default:
-		sys.NewPackage = NewRpmPackage
-	}
 }
 
 // detectService adds the correct service creation function to a System struct
 func (sys *System) detectService() {
 	switch DetectService() {
-	case "upstart":
-		sys.NewService = NewServiceUpstart
 	case "systemd":
 		sys.NewService = NewServiceSystemd
-	case "alpineinit":
-		sys.NewService = NewAlpineServiceInit
-	default:
-		sys.NewService = NewServiceInit
 	}
 }
 
@@ -111,26 +69,6 @@ func (sys *System) detectService() {
 // "deb", "rpm", "apk", or "pacman" package managers. It first attempts to
 // detect the distro. If that fails, it falls back to finding package manager
 // executables. If that fails, it returns the empty string.
-func DetectPackageManager() string {
-	switch DetectDistro() {
-	case "ubuntu":
-		return "deb"
-	case "redhat":
-		return "rpm"
-	case "alpine":
-		return "apk"
-	case "arch":
-		return "pacman"
-	case "debian":
-		return "deb"
-	}
-	for _, manager := range []string{"deb", "rpm", "apk", "pacman"} {
-		if HasCommand(manager) {
-			return manager
-		}
-	}
-	return ""
-}
 
 // DetectService attempts to detect what kind of service management the system
 // is using, "systemd", "upstart", "alpineinit", or "init". It looks for systemctl
