@@ -10,21 +10,21 @@
 
 [[projects]]
   digest = "1:462f2491dc1f2a51eaad20d0858431b7b78a47007ffadb7e1fe6802f158d5931"
-  name = "github.com/aelsabbahy/GOnetstat"
+  name = "github.com/vinodhalaharvi/GOnetstat"
   packages = ["."]
   pruneopts = "UT"
   revision = "edf89f784e0876818dc19f7744a16742a0a66f16"
 
 [[projects]]
   digest = "1:ba7888e42ed8bc5bb3cfc2a84efd3b36db90d9ec2c9559ae4cc581e968710beb"
-  name = "github.com/aelsabbahy/go-ps"
+  name = "github.com/vinodhalaharvi/go-ps"
   packages = ["."]
   pruneopts = "UT"
   revision = "443386855ca1f4d28d990ae9e46e9bc1533de994"
 
 [[projects]]
   digest = "1:d5090c0553a95065df5bb9731b29e211701b7e069665e0f17e9aa08af0fdbda2"
-  name = "github.com/aelsabbahy/goss"
+  name = "github.com/vinodhalaharvi/goss"
   packages = [
     ".",
     "outputs",
@@ -148,13 +148,13 @@
   analyzer-version = 1
   input-imports = [
     "github.com/achanda/go-sysctl",
-    "github.com/aelsabbahy/GOnetstat",
-    "github.com/aelsabbahy/go-ps",
-    "github.com/aelsabbahy/goss",
-    "github.com/aelsabbahy/goss/outputs",
-    "github.com/aelsabbahy/goss/resource",
-    "github.com/aelsabbahy/goss/system",
-    "github.com/aelsabbahy/goss/util",
+    "github.com/vinodhalaharvi/GOnetstat",
+    "github.com/vinodhalaharvi/go-ps",
+    "github.com/vinodhalaharvi/goss",
+    "github.com/vinodhalaharvi/goss/outputs",
+    "github.com/vinodhalaharvi/goss/resource",
+    "github.com/vinodhalaharvi/goss/system",
+    "github.com/vinodhalaharvi/goss/util",
     "github.com/cheekybits/genny/generic",
     "github.com/docker/docker/pkg/mount",
     "github.com/fatih/color",

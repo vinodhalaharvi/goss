@@ -5,9 +5,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/aelsabbahy/goss"
-	"github.com/aelsabbahy/goss/outputs"
 	"github.com/urfave/cli"
+	"github.com/vinodhalaharvi/goss"
+	"github.com/vinodhalaharvi/grpc-goss/outputs"
 	//"time"
 )
 

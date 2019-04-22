@@ -13,8 +13,8 @@ import (
 
 	"gopkg.in/yaml.v2"
 
-	"github.com/aelsabbahy/goss/resource"
 	"github.com/urfave/cli"
+	"github.com/vinodhalaharvi/goss/resource"
 )
 
 const (

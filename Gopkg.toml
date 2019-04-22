@@ -7,7 +7,7 @@
   revision = "6be7678c45d2052640e72060e4f5db6165b1ecab"
 
 [[constraint]]
-    name = "github.com/aelsabbahy/GOnetstat"
+    name = "github.com/vinodhalaharvi/GOnetstat"
     revision = "edf89f784e0876818dc19f7744a16742a0a66f16"
 
 [[constraint]]
@@ -29,7 +29,7 @@
     revision = "58f52c57ce9df13460ac68200cef30a008b9c468"
 
 [[constraint]]
-    name = "github.com/aelsabbahy/go-ps"
+    name = "github.com/vinodhalaharvi/go-ps"
     revision = "443386855ca1f4d28d990ae9e46e9bc1533de994"
 
 [[constraint]]

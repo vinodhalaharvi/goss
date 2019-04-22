@@ -10,12 +10,12 @@ import (
 	"sync"
 	"time"
 
-	"github.com/aelsabbahy/goss/outputs"
-	"github.com/aelsabbahy/goss/resource"
-	"github.com/aelsabbahy/goss/system"
-	"github.com/aelsabbahy/goss/util"
 	"github.com/fatih/color"
 	"github.com/urfave/cli"
+	"github.com/vinodhalaharvi/goss/resource"
+	"github.com/vinodhalaharvi/goss/system"
+	"github.com/vinodhalaharvi/goss/util"
+	"github.com/vinodhalaharvi/grpc-goss/outputs"
 )
 
 func getGossConfig(c *cli.Context) GossConfig {

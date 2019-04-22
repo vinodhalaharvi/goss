@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/aelsabbahy/goss/system"
 	"github.com/oleiade/reflections"
+	"github.com/vinodhalaharvi/goss/system"
 )
 
 type Resource interface {

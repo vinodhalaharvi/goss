@@ -3,7 +3,7 @@ package system
 import (
 	"net"
 
-	"github.com/aelsabbahy/goss/util"
+	"github.com/vinodhalaharvi/goss/util"
 )
 
 type Interface interface {

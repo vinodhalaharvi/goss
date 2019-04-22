@@ -1,8 +1,8 @@
 package resource
 
 import (
-	"github.com/aelsabbahy/goss/system"
-	"github.com/aelsabbahy/goss/util"
+	"github.com/vinodhalaharvi/goss/system"
+	"github.com/vinodhalaharvi/goss/util"
 )
 
 type Interface struct {
